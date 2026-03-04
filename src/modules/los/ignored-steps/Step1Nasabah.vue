@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { useStep2 } from '../composables/useStep2'
 import { useLosStore } from '../stores/losStore'
@@ -21,22 +20,16 @@ function maskKtp(ktp: string): string {
 }
 
 const headers = [
-  { title: 'Customer Name (Masked)', value: 'name', align: 'start' },
-  { title: 'KTP Number (Masked)', value: 'ktp' },
-  { title: 'Employment Type', value: 'employment' },
-  { title: 'Monthly Income (Estimated)', value: 'income' },
-  { title: 'Existing Loan Exposure', value: 'exposure' },
-  { title: 'Pefindo Request Date', value: 'pefindoDate' },
-]
+  { title: 'Nama', value: 'name', align: 'start' },
+  { title: 'KTP', value: 'ktp', align: 'start' },
+  { title: 'Income', value: 'income', align: 'end' },
+] as const
 
 const items = computed(() => [
   {
     name: maskName(store.nasabah.namaLengkap),
     ktp: maskKtp(store.nasabah.noKtp.replace(/[^0-9]/g, '')),
-    employment: store.nasabah.jenisPekerjaan,
     income: new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(store.nasabah.penghasilanPerBulan),
-    exposure: 'Rp 12,000,000', // Example static, can be dynamic if needed
-    pefindoDate: '02 Feb 2026', // Example static, can be dynamic if needed
   }
 ])
 </script>
